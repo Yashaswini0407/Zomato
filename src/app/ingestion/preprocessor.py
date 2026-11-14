@@ -113,6 +113,7 @@ class Preprocessor:
         critical_fields = ["name", "location", "rating", "estimated_cost"]
         initial_count = len(df)
 
+        df = df.copy()  # Avoid SettingWithCopyWarning
         df = df.dropna(subset=critical_fields)
 
         dropped = initial_count - len(df)
@@ -208,6 +209,7 @@ class Preprocessor:
             else:
                 return BudgetBand.HIGH
 
+        df = df.copy()  # Avoid SettingWithCopyWarning
         df["budget_band"] = df["estimated_cost"].apply(get_budget_band)
 
         # Log distribution
@@ -215,6 +217,23 @@ class Preprocessor:
         logger.info(f"Budget band distribution:\n{band_counts}")
 
         return df
+
+    def get_budget_band_for_cost(self, cost: float) -> BudgetBand:
+        """
+        Get budget band for a single cost value.
+
+        Args:
+            cost: Cost value
+
+        Returns:
+            BudgetBand enum value
+        """
+        if cost <= self.budget_low_max:
+            return BudgetBand.LOW
+        elif cost <= self.budget_medium_max:
+            return BudgetBand.MEDIUM
+        else:
+            return BudgetBand.HIGH
 
     def validate_ranges(self, df: pd.DataFrame) -> pd.DataFrame:
         """
