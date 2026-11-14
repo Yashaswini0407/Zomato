@@ -5,8 +5,14 @@ Uses pydantic-settings to load configuration from environment variables.
 """
 
 from typing import Literal
+from pathlib import Path
 from pydantic import Field, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+env_path = Path(__file__).parent.parent.parent / ".env"
+load_dotenv(env_path)
 
 
 class Settings(BaseSettings):
@@ -41,7 +47,7 @@ class Settings(BaseSettings):
         description="API key for the LLM provider"
     )
     llm_model: str = Field(
-        default="mixtral-8x7b-32768",
+        default="qwen/qwen3.8-27b",
         description="Model name to use with the LLM provider"
     )
 
