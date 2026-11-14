@@ -1,0 +1,3 @@
+# This directory is for processed restaurant data
+# Files in this directory should not be committed to Git if they are large
+# Run the ingestion script to generate processed data
