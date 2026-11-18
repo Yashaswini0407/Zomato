@@ -8,8 +8,11 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from dotenv import load_dotenv
 from pathlib import Path
+
+# Load from .env for local development, Streamlit secrets for cloud
 env_path = Path(__file__).parent / ".env"
-load_dotenv(env_path)
+if env_path.exists():
+    load_dotenv(env_path)
 
 import streamlit as st
 import pandas as pd
@@ -29,6 +32,12 @@ def main():
 
     st.title("🍽️ AI-Powered Restaurant Recommendations")
     st.markdown("Get personalized restaurant recommendations based on your preferences")
+
+    # Check for API key
+    api_key = os.environ.get("LLM_API_KEY") or st.secrets.get("LLM_API_KEY", "")
+    if not api_key:
+        st.error("⚠️ LLM API Key not configured. Please set LLM_API_KEY in Streamlit Cloud secrets or .env file.")
+        st.stop()
 
     # Load data
     settings = get_settings()

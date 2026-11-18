@@ -2,6 +2,7 @@
 Configuration management for the restaurant recommendation system.
 
 Uses pydantic-settings to load configuration from environment variables.
+Supports both .env files and Streamlit Cloud secrets.
 """
 
 from typing import Literal
@@ -10,9 +11,10 @@ from pydantic import Field, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from dotenv import load_dotenv
 
-# Load environment variables from .env file
+# Load environment variables from .env file for local development
 env_path = Path(__file__).parent.parent.parent / ".env"
-load_dotenv(env_path)
+if env_path.exists():
+    load_dotenv(env_path)
 
 
 class Settings(BaseSettings):

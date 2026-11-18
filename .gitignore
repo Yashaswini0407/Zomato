@@ -38,6 +38,10 @@ ENV/
 .env.local
 .env.*.local
 
+# Streamlit Secrets (keep config.toml)
+.streamlit/secrets.toml
+.streamlit/secrets.toml.example
+
 # Data
 data/raw/*
 !data/raw/.gitkeep
@@ -57,9 +61,6 @@ Thumbs.db
 .coverage
 htmlcov/
 .tox/
-
-# Streamlit
-.streamlit/
 
 # Jupyter Notebook
 .ipynb_checkpoints
