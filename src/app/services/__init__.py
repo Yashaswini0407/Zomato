@@ -8,6 +8,7 @@ from .llm_client import GroqClient
 from .prompt_builder import PromptBuilder
 from .response_parser import ResponseParser
 from .merger import RecommendationMerger
+from .orchestrator import RecommendationOrchestrator
 
 __all__ = [
     "InputValidator",
@@ -15,5 +16,6 @@ __all__ = [
     "GroqClient",
     "PromptBuilder",
     "ResponseParser",
-    "RecommendationMerger"
+    "RecommendationMerger",
+    "RecommendationOrchestrator"
 ]
