@@ -1,5 +1,9 @@
 # Implementation Plan: AI-Powered Restaurant Recommendation System
 
+**LLM Provider**: Groq (qwen/qwen3.8-27b)
+**Current Status**: Phases 0-4 Complete (4/11 phases, 36%)
+**Data Source**: Synthetic data (95 restaurants) - Hugging Face dataset was broken
+
 This document provides a phase-wise implementation plan for the Zomato-inspired restaurant recommendation system, derived from [ProblemStatement.md](./ProblemStatement.md) and [architecture.md](./architecture.md).
 
 ## Table of Contents
@@ -78,7 +82,7 @@ This document provides a phase-wise implementation plan for the Zomato-inspired 
 - [ ] Define environment variables:
   - `LLM_PROVIDER=groq`
   - `LLM_API_KEY=<your-groq-api-key>`
-  - `LLM_MODEL=mixtral-8x7b-32768` (or other Groq model)
+  - `LLM_MODEL=qwen/qwen3.8-27b` (Groq model - mixtral decommissioned)
   - `DATA_PATH=data/processed/restaurants.parquet`
   - `MAX_CANDIDATES=30`
   - `BUDGET_LOW_MAX=500`
@@ -837,7 +841,7 @@ This document provides a phase-wise implementation plan for the Zomato-inspired 
 - [ ] Add environment variables in Streamlit settings:
   - `LLM_PROVIDER=groq`
   - `LLM_API_KEY=<your-groq-api-key>`
-  - `LLM_MODEL=mixtral-8x7b-32768`
+  - `LLM_MODEL=qwen/qwen3.8-27b` (Groq model - mixtral decommissioned)
   - `MAX_CANDIDATES=30`
   - `BUDGET_LOW_MAX=500`
   - `BUDGET_MEDIUM_MAX=1500`
@@ -925,7 +929,7 @@ This document provides a phase-wise implementation plan for the Zomato-inspired 
 - [ ] Configure build settings
 - [ ] Add environment variables:
   - `LLM_API_KEY`
-  - `LLM_MODEL`
+  - `LLM_MODEL=qwen/qwen3.8-27b` (Groq model - mixtral decommissioned)
   - `DATA_PATH`
   - etc.
 - [ ] Deploy backend
