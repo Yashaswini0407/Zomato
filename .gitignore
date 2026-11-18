@@ -40,7 +40,6 @@ ENV/
 
 # Streamlit Secrets (keep config.toml)
 .streamlit/secrets.toml
-.streamlit/secrets.toml.example
 
 # Data
 data/raw/*
