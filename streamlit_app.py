@@ -37,12 +37,19 @@ def main():
     api_key = os.environ.get("LLM_API_KEY") or st.secrets.get("LLM_API_KEY", "")
     if not api_key:
         st.error("⚠️ LLM API Key not configured. Please set LLM_API_KEY in Streamlit Cloud secrets or .env file.")
+        st.info("For local development, create a .env file with LLM_API_KEY")
+        st.info("For Streamlit Cloud, configure secrets in app settings")
         st.stop()
 
     # Load data
-    settings = get_settings()
-    repository = ParquetRepository(settings.data_path)
-    orchestrator = RecommendationOrchestrator(repository)
+    try:
+        settings = get_settings()
+        repository = ParquetRepository(settings.data_path)
+        orchestrator = RecommendationOrchestrator(repository)
+    except Exception as e:
+        st.error(f"Failed to load data: {e}")
+        st.info("Please ensure data/processed/restaurants.parquet exists")
+        st.stop()
 
     # Sidebar for filters
     st.sidebar.header("Your Preferences")
